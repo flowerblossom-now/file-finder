@@ -1,27 +1,29 @@
 import os
-from pathlib import Path
 
 file_name = input("file : ").strip()
 file_path = input("path : ").strip()
 os.chdir(file_path)
 
-found = False
+found_path = []
 
 while True:
     for path, subfolders, files in os.walk(os.getcwd()):
         if file_name in files:
-            print(f"file {file_name} was found in {path}")
-            found = True
-            break
+            found_path.append(path)
 
-    if found == True:
+    if len(found_path) > 0:
         break
 
     prev = os.getcwd()
     os.chdir("..")
     if os.getcwd() == prev:
-        print("file was not found")
         break
+
+if len(found_path) != 0:
+    for path in found_path:
+        print(path)
+else:
+    print("path was not found")
 
 
 # while os.path.isfile(file_name) == False:
