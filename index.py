@@ -1,6 +1,22 @@
 import os
 
 
+def choose_file(paths, file_name):
+    if len(paths) == 0:
+        return
+
+    number = int(input("file number: "))
+    folder = paths[number - 1]
+    full_path = os.path.join(folder, file_name)
+    show_file(full_path)
+
+
+def show_file(path):
+    with open(path, "r") as f:
+        context = f.read()
+        print(context)
+
+
 def up():
     prev = os.getcwd()
     os.chdir("..")
@@ -32,10 +48,10 @@ def find_one(file_name):
 
 def print_res(paths: list):
     if len(paths) != 0:
-        for path in paths:
-            print(path)
+        for number, path in enumerate(paths, 1):
+            print(f"{number}. {path}")
     else:
-        print("path was not found")
+        print("file not found")
 
 
 modes = {"a": find_all, "1": find_one}
@@ -60,7 +76,7 @@ search = modes[mode]
 result = search(file_name)
 print_res(result)
 
-
+choose_file(result, file_name)
 # while os.path.isfile(file_name) == False:
 #    prev = os.getcwd()
 #    os.chdir("..")
