@@ -1,6 +1,5 @@
+from file_search import search_files
 from net_tools import net_menu
-
-from file_finder import search_files
 
 tools = {"1": search_files, "2": net_menu}
 
